@@ -1,1 +1,19 @@
-<p>drag-and-drop-cdk-angular works!</p>
+<div class="row">
+    <div class="col-lg-12">
+        <h1>Angular 11: Drag & Drop with a flex-wrap</h1>
+
+        <button (click)="add()">Add</button> <button (click)="shuffle()">Shuffle</button><br />
+        <ul class="example-list">
+            <li *ngFor="let item of items">{{ item }}</li>
+        </ul>
+
+        <div #dropListContainer class="example-container" cdkDropListGroup>
+            <div *ngFor="let item of items; let i = index" cdkDropList [cdkDropListData]="i">
+                <div cdkDrag [cdkDragData]="i" (cdkDragEntered)="dragEntered($event)" (cdkDragMoved)="dragMoved($event)"
+                    (cdkDragDropped)="dragDropped($event)" class="example-box">
+                    {{ item }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

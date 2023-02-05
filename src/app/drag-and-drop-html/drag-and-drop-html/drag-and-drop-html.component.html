@@ -1,1 +1,8 @@
-<p>drag-and-drop-html works!</p>
+<div class="row">
+    <h3 class="my-3">Drag and Drop html</h3>
+    <div class="col-lg-12">
+        <div class="container">
+            <div draggable="true" class="box" #box (dragstart)="handleDragStart($event)" (dragover)="handleDragOver($event)" (dragenter)="handleDragEnter($event)" (dragleave)="handleDragLeave($event)"   (dragend)="handleDragEnd($event)" *ngFor="let item of items">{{item}}</div>
+        </div>
+    </div>
+</div>

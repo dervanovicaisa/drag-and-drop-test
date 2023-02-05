@@ -11,7 +11,7 @@ import { DragAndDropHtmlComponent } from './drag-and-drop-html/drag-and-drop-htm
     AppComponent,
     DragAndDropCanvasComponent,
     DragAndDropCdkAngularComponent,
-    DragAndDropHtmlComponent
+    DragAndDropHtmlComponent,
   ],
   imports: [
     BrowserModule,
