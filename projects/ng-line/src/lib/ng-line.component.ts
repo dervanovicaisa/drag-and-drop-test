@@ -32,10 +32,21 @@ export class NgLineComponent implements OnInit {
     this.linesvg.nativeElement.style.display = "block";
     this.linesvg.nativeElement.style.left = pageX - this.shiftX / 2 + 'px';
     this.linesvg.nativeElement.style.top = pageY - this.shiftY / 2 + 'px';
+    this.drawSvg(pageX, pageY);
   }
-  drawSvg(x1: number, y1: number) {
-    this.line.nativeElement.setAttribute("x2", x1);
-    this.line.nativeElement.setAttribute("y2", y1);
+  drawSvg(x: number, y: number) {
+    const p1x = x;
+    const p1y = y;
+    const p2x = 0;
+    const p2y = 0;
+    const mpx = (p2x + p1x) * 0.5;
+    const mpy = (p2y + p1y) * 0.5;
+    const theta = Math.atan2(p2y - p1y, p2x - p1x) - Math.PI / 2;
+    const offset = 30;
+    const c1x = mpx + offset * Math.cos(theta);
+    const c1y = mpy + offset * Math.sin(theta);
+    const curve = `M${p1x} ${p1y} Q${c1x} ${c1y} ${p2x} ${p2y}`;
+    this.line.nativeElement.setAttribute("d", curve);
     this.line.nativeElement.style.display = "block";
     this.linesvg.nativeElement.style.display = "block";
   }
@@ -56,9 +67,12 @@ export class NgLineComponent implements OnInit {
   //   this.linesvg.nativeElement.style.zIndex = 1000;
   // }
   onMouseMove(event: MouseEvent) {
+    const x = event.pageX;
+    const y = event.pageY;
     if (this.isClicked) {
       this.counter++;
       this.linesvg.nativeElement.style.width = this.counter + "px";
+      this.drawSvg(x, y);
     }
 
   }
