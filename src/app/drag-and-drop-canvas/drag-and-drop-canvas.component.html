@@ -4,7 +4,7 @@
             <button (click)="onAddRecentagle()" class="btn btn-primary my-2">Add</button>
         </div>
         <div class="col-sm-6">
-            <canvas #canvas  name="canvas" (mousedown)="onMouseDown($event)" (mouseup)="onMouseUp($event)"
+            <canvas width="300" height="150" #canvas  name="canvas" (mousedown)="onMouseDown($event)" (mouseup)="onMouseUp($event)"
                 (mouseout)="onMouseOut($event)" (mousemove)="onMouseMove($event)"
                 style="border:1px solid rgb(236, 222, 222);"></canvas>
         </div>

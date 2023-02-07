@@ -1,0 +1,9 @@
+<div id="rootDivs">
+  <div #cdkDragBox (cdkDragMoved)="dragMoved($event)" class="example-box" id="box1" cdkDrag>
+    Drag me around
+  </div>
+  <div #cdkDragBox (cdkDragMoved)="dragMoved($event)" class="example-box" id="box1" cdkDrag>
+    Drag me around
+  </div>
+  <lib-ng-line [box]=box></lib-ng-line>
+</div>

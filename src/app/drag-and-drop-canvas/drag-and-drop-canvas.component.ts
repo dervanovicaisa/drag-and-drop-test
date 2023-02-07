@@ -18,6 +18,10 @@ export class DragAndDropCanvasComponent {
     defaultRec: any;
     randomColor: number = 0;
     constructor() { }
+
+    randomNumber(min: number, max: number) {
+        return Math.random() * (max - min) + min;
+    }
     drawShape() {
         this.context.clearRect(0, 0, this.context.canvas.clientWidth, this.context.canvas.clientHeight);
         this.rects.map((el) => {
@@ -34,8 +38,8 @@ export class DragAndDropCanvasComponent {
         }
     }
     addNewRecentagle() {
-        this.startX = +(Math.random() * this.context.canvas.clientWidth).toPrecision(1);
-        this.startY = +(Math.random() * this.context.canvas.clientHeight).toPrecision(1);
+        this.startX = +(this.randomNumber(0, 300)).toPrecision(1);
+        this.startY = +(this.randomNumber(0, 150)).toPrecision(1);
         this.defaultRec = new Rect(this.startX, this.startY, 50, 50, this.ranColor())
         this.rects.push(this.defaultRec);
     }
@@ -53,8 +57,10 @@ export class DragAndDropCanvasComponent {
         console.log("y", y);
         console.log("shapeLeft", shapeLeft, "shapeRight", shapeRight, "shapeTop", shapeTop, "shapeBottom", shapeBottom);
         console.log("x > shapeLeft", x > shapeLeft);
+        console.log("x < shapeRight", x < shapeRight);
         console.log("y > shapeTop", y > shapeTop);
-        if (x > shapeLeft  && y > shapeTop) {
+        console.log("y < shapeBottom", y < shapeBottom);
+        if (x > shapeLeft && y > shapeTop) {
             console.log("heree");
             return true;
         } else {
@@ -64,6 +70,7 @@ export class DragAndDropCanvasComponent {
 
     onMouseDown(event: MouseEvent) {
         event.preventDefault();
+        // console.log(event);
         this.startX = event.clientX;
         this.startY = event.clientY;
         let index = 0;
