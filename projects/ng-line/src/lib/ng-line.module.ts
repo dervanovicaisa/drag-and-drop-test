@@ -2,11 +2,9 @@ import { NgModule } from '@angular/core';
 import { NgLineComponent } from './ng-line.component';
 
 @NgModule({
-  imports: [
-    NgLineComponent,
-  ],
-  exports: [
-    NgLineComponent
-  ]
+  declarations: [NgLineComponent],
+  imports: [],
+  exports: [NgLineComponent],
+  providers:[]
 })
 export class NgLineModule { }

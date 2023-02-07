@@ -1,7 +1,8 @@
 svg {
-  width: 50px;
+  width: 20px;
   height: 50px;
-  cursor: move;
+  /* cursor: move; */
   position: absolute;
-  top: 0;
+  display: none;
+  /* top: 0; */
 }

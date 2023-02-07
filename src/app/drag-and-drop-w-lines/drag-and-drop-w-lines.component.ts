@@ -1,5 +1,6 @@
 import { CdkDragMove } from '@angular/cdk/drag-drop';
-import { Component, OnInit, ElementRef, Output, ViewChild } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
+import { DragAndDropService } from './service/drag-and-drop.service';
 
 @Component({
   selector: 'app-drag-and-drop-w-lines',
@@ -7,17 +8,15 @@ import { Component, OnInit, ElementRef, Output, ViewChild } from '@angular/core'
   styleUrls: ['./drag-and-drop-w-lines.component.css'],
 })
 export class DragAndDropWLinesComponent implements OnInit {
-  @Output("box") box: ElementRef;
-  @ViewChild("cdkDragBox") cdkDragBox: ElementRef;
-  constructor(private el: ElementRef, box: ElementRef, cdkDragBox: ElementRef) {
-    this.box = box;
-    this.cdkDragBox = cdkDragBox;
-  }
+  constructor(private serviceDrop: DragAndDropService) { }
   ngOnInit(): void {
-    this.box = this.cdkDragBox;
   }
 
+  getPosition(event: any) {
+    this.serviceDrop.getPosition(event);
+
+  }
   dragMoved(event: CdkDragMove) {
-    this.box = event.source.element;
+    this.serviceDrop.dragMoved(event);
   }
 }

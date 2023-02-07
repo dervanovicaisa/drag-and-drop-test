@@ -1,3 +1,3 @@
-<svg #linesvg (mousedown)="onMouseDown($event)" (mousedown)="onMouseDown($event)" (mouseup)="onMouseUp($event)" (dragstart)="onDragStartFun()" (mousemove)="onMouseMove($event)">
-  <line x1=0 y1=0 x2=200 y2=0 style="stroke:rgba(67, 65, 65, 0.745);stroke-width:2" />
+<svg #linesvg (click)="changeWidth($event)" (mousemove)="onMouseMove($event)" (mouseup)="onMouseUp($event)">
+  <line #line x1=0 y1=0 x2=200 y2=0 style="stroke:rgba(67, 65, 65, 0.745);stroke-width:2" />
 </svg>

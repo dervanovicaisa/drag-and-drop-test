@@ -7,7 +7,7 @@ import { DragAndDropCanvasComponent } from './drag-and-drop-canvas/drag-and-drop
 import { DragAndDropCdkAngularComponent } from './drag-and-drop-cdk-angular/drag-and-drop-cdk-angular.component';
 import { DragAndDropHtmlComponent } from './drag-and-drop-html/drag-and-drop-html.component';
 import { DragAndDropWLinesComponent } from './drag-and-drop-w-lines/drag-and-drop-w-lines.component';
-import { NgLineComponent } from 'projects/ng-line/src/public-api';
+import { NgLineComponent, NgLineModule } from 'projects/ng-line/src/public-api';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +20,7 @@ import { NgLineComponent } from 'projects/ng-line/src/public-api';
     BrowserModule,
     AppRoutingModule,
     DragDropModule,
-    NgLineComponent
+    NgLineModule
   ],
   providers: [],
   bootstrap: [AppComponent]
