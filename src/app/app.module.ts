@@ -8,6 +8,7 @@ import { DragAndDropCdkAngularComponent } from './drag-and-drop-cdk-angular/drag
 import { DragAndDropHtmlComponent } from './drag-and-drop-html/drag-and-drop-html.component';
 import { DragAndDropWLinesComponent } from './drag-and-drop-w-lines/drag-and-drop-w-lines.component';
 import { NgLineComponent, NgLineModule } from 'projects/ng-line/src/public-api';
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +21,8 @@ import { NgLineComponent, NgLineModule } from 'projects/ng-line/src/public-api';
     BrowserModule,
     AppRoutingModule,
     DragDropModule,
-    NgLineModule
+    NgLineModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
