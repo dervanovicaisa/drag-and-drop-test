@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DragAndDropWLinesComponent } from './drag-and-drop-w-lines.component';
+import { DragAndDropWLinesComponent } from './drag-and-drop.component';
 
 describe('DragAndDropWLinesComponent', () => {
   let component: DragAndDropWLinesComponent;

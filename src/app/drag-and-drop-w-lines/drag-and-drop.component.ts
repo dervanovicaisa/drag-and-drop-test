@@ -4,9 +4,9 @@ import { BoxConfigModel } from './model/box-config.model';
 import { DragAndDropService } from './service/drag-and-drop.service';
 
 @Component({
-  selector: 'app-drag-and-drop-w-lines',
-  templateUrl: './drag-and-drop-w-lines.component.html',
-  styleUrls: ['./drag-and-drop-w-lines.component.css'],
+  selector: 'app-drag-and-drop',
+  templateUrl: './drag-and-drop.component.html',
+  styleUrls: ['./drag-and-drop.component.css'],
 })
 export class DragAndDropWLinesComponent implements OnInit {
   @ViewChild("box") boxEl: ElementRef;
