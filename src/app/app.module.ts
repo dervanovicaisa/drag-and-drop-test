@@ -4,7 +4,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { DragAndDropWLinesComponent } from './drag-and-drop-w-lines/drag-and-drop.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LinerModule } from 'projects/liner/src/public-api';
 @NgModule({
   declarations: [
     AppComponent,
@@ -14,7 +15,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     DragDropModule,
-    ReactiveFormsModule
+    FormsModule,
+    LinerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

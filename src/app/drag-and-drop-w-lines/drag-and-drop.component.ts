@@ -1,6 +1,5 @@
 import { CdkDragMove } from '@angular/cdk/drag-drop';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { BoxConfigModel } from './model/box-config.model';
+import { Component, OnInit } from '@angular/core';
 import { DragAndDropService } from './service/drag-and-drop.service';
 
 @Component({
@@ -9,16 +8,12 @@ import { DragAndDropService } from './service/drag-and-drop.service';
   styleUrls: ['./drag-and-drop.component.css'],
 })
 export class DragAndDropWLinesComponent implements OnInit {
-  @ViewChild("box") boxEl: ElementRef;
-  node: Array<any> = new Array<any>;
-  nodeEvents: Array<BoxConfigModel> = new Array<BoxConfigModel>;
-  xCenter: number = 0;
-  yCenter: number = 0;
-  box: any;
-  constructor(private serviceDrop: DragAndDropService, boxEl: ElementRef) {
-    this.boxEl = boxEl;
-    this.box = this.boxEl.nativeElement.getBoundingClientRect()
-  }
+  node: Array<number> = new Array<number>;
+  pointerPosition: { x: number; y: number; } | undefined;
+  distance: { x: number; y: number; } | undefined;
+  pointCordinate: { x: number; y: number; } | undefined;
+  id: number | undefined;
+  constructor(private serviceDrop: DragAndDropService) { }
   ngOnInit(): void {
     this.serviceDrop.items.subscribe((el) => {
       this.node = el;
@@ -26,19 +21,17 @@ export class DragAndDropWLinesComponent implements OnInit {
   }
   onAddItem() {
     const itemRandom = +(Math.random() * 10).toPrecision(1);
-    this.xCenter = (this.box.left + this.box.right) / 2;
-    this.yCenter = (this.box.top + this.box.bottom) / 2;
-    const boxconfig = new BoxConfigModel({ x: 0, y: 0 }, { x: 0, y: 0 }, { x: this.xCenter, y: this.yCenter }, true, 0);
-    this.nodeEvents.push(boxconfig);
     this.node.push(itemRandom);
     this.serviceDrop.onAddItem(this.node);
   }
 
-  dragMoved(event: CdkDragMove, id: number) {
-    this.xCenter = (this.box.left + this.box.right) / 2;
-    this.yCenter = (this.box.top + this.box.bottom) / 2;
-    const boxconfig = new BoxConfigModel(event.distance, event.pointerPosition, { x: this.xCenter, y: this.yCenter }, true, id);
-    this.nodeEvents[id] = boxconfig;
-    this.serviceDrop.dragMoved(this.nodeEvents);
+  dragMoved(event: CdkDragMove, id: number, box: HTMLDivElement) {
+    const xCenter = (box.getBoundingClientRect().left + box.getBoundingClientRect().right) / 2;
+    const yCenter = (box.getBoundingClientRect().top + box.getBoundingClientRect().bottom) / 2;
+    this.pointerPosition = event.pointerPosition;
+    this.distance = event.distance;
+    this.pointCordinate = { x: xCenter, y: yCenter };
+    this.id = id;
   }
+
 }

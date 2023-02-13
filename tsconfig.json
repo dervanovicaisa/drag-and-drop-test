@@ -12,6 +12,9 @@
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
     "paths": {
+      "liner": [
+        "dist/liner"
+      ],
       "ng-line": [
         "dist/ng-line"
       ]

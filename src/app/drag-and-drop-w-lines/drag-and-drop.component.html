@@ -1,7 +1,9 @@
 <div id="rootDivs">
   <button class="btn btn-primary my-3" (click)="onAddItem()">Add new</button>
-  <div (cdkDragMoved)="dragMoved($event, i)" class="example-box" #box id={{item}} cdkDrag
+  <div (cdkDragMoved)="dragMoved($event, i, box)" class="example-box" #box (ngModel)="box" id={{item}} cdkDrag
     *ngFor="let item of node; let i = index;">
     {{item}}
   </div>
+  <lib-liner [pointerPosition]="pointerPosition" [distance]="distance" [pointCordinate]="pointCordinate"
+    [id]="id"></lib-liner>
 </div>
