@@ -19,9 +19,11 @@ export class LinerComponent implements OnChanges {
   @Input("distance")
   distance: { x: number; y: number; } | undefined;
   @Input("pointCordinate")
-  pointCordinate: { x: number; y: number; } | undefined;
+  pointCordinate: {} | undefined;
   @Input("id") id: number | undefined;
+  @Input("dotIndex") dotIndex: number | undefined;
   boxs: Array<any> = new Array<any>;
+  dots: Array<any> = new Array<any>;
   @ViewChild("path") path: ElementRef;
   @ViewChild("svg") svg: ElementRef;
   constructor(path: ElementRef, svg: ElementRef) {
@@ -30,13 +32,23 @@ export class LinerComponent implements OnChanges {
   }
 
   ngOnChanges(simpleChanges: SimpleChanges) {
-    if (this.id !== undefined) {
-      this.storeBox(this.id);
+    const curr = localStorage.getItem("currValue");
+    const prev = localStorage.getItem("prevValue");
+
+    if (simpleChanges["dotIndex"] !== undefined) {
+      localStorage.setItem("currValue", simpleChanges["dotIndex"].currentValue);
+      localStorage.setItem("prevValue", simpleChanges["dotIndex"].previousValue);
     }
+    if (this.id !== undefined) {
+      this.storeBox(this.id, Number(curr), Number(prev))
+    }
+    this.moveAt();
+
   }
 
-  storeBox(id: number) {
-    this.boxs[id] = { pointCordinate: this.pointCordinate, pointerPosition: this.pointerPosition, distance: this.distance };
+  storeBox(id: number, currId: number, prevId: number) {
+    this.dots[currId] = { pointCordinate: this.pointCordinate, pointerPosition: this.pointerPosition, distance: this.distance };
+    this.boxs[id] = this.dots;
     this.moveAt();
     this.drawSvg();
   }
@@ -45,12 +57,11 @@ export class LinerComponent implements OnChanges {
     this.svg.nativeElement.style.left = 0 + 'px';
   }
   drawSvg() {
-    // `M${0} ${0} L${this.counter} 0`
-    const p1x = this.boxs[0].pointCordinate.x;
-    const p1y = this.boxs[0].pointCordinate.y;
+    const p1x = JSON.parse(Object(localStorage.getItem("prevPointCordinate"))).x;
+    const p1y = JSON.parse(Object(localStorage.getItem("prevPointCordinate"))).y;
 
-    const p2x = this.boxs[1].pointCordinate.x;
-    const p2y = this.boxs[1].pointCordinate.y;
+    const p2x = JSON.parse(Object(localStorage.getItem("currPointCordinate"))).x;
+    const p2y = JSON.parse(Object(localStorage.getItem("currPointCordinate"))).y;
 
     const mpx = (p2x + p1x) * 0.5;
     const mpy = (p2y + p1y) * 0.5;
@@ -71,6 +82,7 @@ export class LinerComponent implements OnChanges {
 
     this.path.nativeElement.setAttribute("d", curve);
     this.path.nativeElement.style.display = "block";
+
   }
 
 }

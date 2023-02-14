@@ -9,10 +9,13 @@ import { DragAndDropService } from './service/drag-and-drop.service';
 })
 export class DragAndDropWLinesComponent implements OnInit {
   node: Array<number> = new Array<number>;
+  dots: Array<number> = [0, 1, 2, 3];
   pointerPosition: { x: number; y: number; } | undefined;
   distance: { x: number; y: number; } | undefined;
-  pointCordinate: { x: number; y: number; } | undefined;
+  pointCordinate: {} | undefined;
   id: number | undefined;
+  dot: any;
+  dotIndex: number | undefined;
   constructor(private serviceDrop: DragAndDropService) { }
   ngOnInit(): void {
     this.serviceDrop.items.subscribe((el) => {
@@ -25,13 +28,27 @@ export class DragAndDropWLinesComponent implements OnInit {
     this.serviceDrop.onAddItem(this.node);
   }
 
-  dragMoved(event: CdkDragMove, id: number, box: HTMLDivElement) {
-    const xCenter = (box.getBoundingClientRect().left + box.getBoundingClientRect().right) / 2;
-    const yCenter = (box.getBoundingClientRect().top + box.getBoundingClientRect().bottom) / 2;
-    this.pointerPosition = event.pointerPosition;
-    this.distance = event.distance;
+  dotClicked(dot: HTMLDivElement, id: number) {
+    this.dot = dot;
+    const xCenter = (dot.getBoundingClientRect().left + dot.getBoundingClientRect().right) / 2;
+    const yCenter = (dot.getBoundingClientRect().top + dot.getBoundingClientRect().bottom) / 2;
     this.pointCordinate = { x: xCenter, y: yCenter };
-    this.id = id;
+    this.dotIndex = id;
+  }
+  dragMoved(event: CdkDragMove, id: number) {
+    if (this.dot !== undefined) {
+      const xCenter = (this.dot.getBoundingClientRect().left + this.dot.getBoundingClientRect().right) / 2;
+      const yCenter = (this.dot.getBoundingClientRect().top + this.dot.getBoundingClientRect().bottom) / 2;
+      this.pointerPosition = event.pointerPosition;
+      this.distance = event.distance;
+      this.pointCordinate = { x: xCenter, y: yCenter };
+      this.id = id;
+      if (id == 0) {
+        localStorage.setItem("prevPointCordinate", JSON.stringify(this.pointCordinate));
+      }else{
+        localStorage.setItem("currPointCordinate", JSON.stringify(this.pointCordinate));
+      }
+    }
   }
 
 }

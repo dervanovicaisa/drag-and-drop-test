@@ -24,35 +24,28 @@
     0 3px 14px 2px rgba(0, 0, 0, 0.12);
 }
 
-#svg1 {
+.dot {
+  height: 12px;
+  width: 12px;
   position: absolute;
-  margin-top: -107px;
-  margin-left: -66px;
 }
 
-#svg2 {
-  position: absolute;
-  margin-left: -165px;
-  margin-top: -7px;
+.dot-0 {
+  top: 0;
+  left: 0;
 }
 
-#svg3 {
-  position: absolute;
-  margin-top: 90px;
-  margin-left: -64px;
+.dot-1 {
+  bottom: 0;
+  left: 0;
 }
 
-#svg4 {
-  position: absolute;
-  margin-left: 33px;
-  margin-top: -7px;
+.dot-2 {
+  right: 0;
+  top: 0;
 }
 
-.svg-icon {
-  cursor: pointer;
-  border-radius: 16px;
-}
-
-.svg-icon:hover {
-  background: #d0d0b96e;
+.dot-3 {
+  right: 0;
+  bottom: 0;
 }
