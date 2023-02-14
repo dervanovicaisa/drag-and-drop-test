@@ -35,7 +35,7 @@ export class DragAndDropWLinesComponent implements OnInit {
     this.pointCordinate = { x: xCenter, y: yCenter };
     this.dotIndex = id;
   }
-  dragMoved(event: CdkDragMove, id: number) {
+  dragMoved(event: CdkDragMove, id: number, box: HTMLDivElement) {
     if (this.dot !== undefined) {
       const xCenter = (this.dot.getBoundingClientRect().left + this.dot.getBoundingClientRect().right) / 2;
       const yCenter = (this.dot.getBoundingClientRect().top + this.dot.getBoundingClientRect().bottom) / 2;
@@ -45,7 +45,7 @@ export class DragAndDropWLinesComponent implements OnInit {
       this.id = id;
       if (id == 0) {
         localStorage.setItem("prevPointCordinate", JSON.stringify(this.pointCordinate));
-      }else{
+      } else {
         localStorage.setItem("currPointCordinate", JSON.stringify(this.pointCordinate));
       }
     }

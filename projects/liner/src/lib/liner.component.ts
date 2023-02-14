@@ -8,7 +8,8 @@ import { OnChanges, Component } from '@angular/core';
   selector: 'lib-liner',
   template: `
   <svg #svg>
-  <path #path did="curve" d="M0 0" stroke="green" stroke-width="4" stroke-linecap="round" fill="transparent" />
+  <!-- <path #path did="curve" d="M0 0" stroke="green" stroke-width="4" stroke-linecap="round" fill="transparent" /> -->
+  <path  #path  id="path" stroke="green" stroke-width="4" stroke-linecap="round" fill="transparent"  fill="none" d="M0 0"/>
   </svg>
   `,
   styleUrls: ['./line.style.css'],
@@ -40,13 +41,13 @@ export class LinerComponent implements OnChanges {
       localStorage.setItem("prevValue", simpleChanges["dotIndex"].previousValue);
     }
     if (this.id !== undefined) {
-      this.storeBox(this.id, Number(curr), Number(prev))
+      this.storeBox(this.id, Number(curr))
     }
     this.moveAt();
 
   }
 
-  storeBox(id: number, currId: number, prevId: number) {
+  storeBox(id: number, currId: number) {
     this.dots[currId] = { pointCordinate: this.pointCordinate, pointerPosition: this.pointerPosition, distance: this.distance };
     this.boxs[id] = this.dots;
     this.moveAt();
@@ -69,16 +70,16 @@ export class LinerComponent implements OnChanges {
     const theta = Math.atan2(p2y - p1y, p2x - p1x) - Math.PI / 2;
 
     const offsetX = window.innerWidth - p1x - p2x;
-    // const offsetY = window.innerHeight - p1y - p2y;
+
+    const offsetY = window.innerHeight - p1y - p2y;
 
     const c1x = mpx + offsetX * Math.cos(theta);
     const c1y = mpy + offsetX * Math.sin(theta);
 
-    // const c2x = mpx - offsetY * Math.cos(theta);
-    // const c2y = mpy - offsetY * Math.sin(theta);
+    const c2x = mpx + offsetY * Math.cos(theta);
+    const c2y = mpy + offsetY * Math.sin(theta);
 
-
-    const curve = `M ${p1x} ${p1y}  Q${c1x} ${c1y} ${p2x} ${p2y}`;
+    const curve = `M ${p1x} ${p1y}  C${c1x} ${c1y} ${c2x} ${c2y} ${p2x} ${p2y}`;
 
     this.path.nativeElement.setAttribute("d", curve);
     this.path.nativeElement.style.display = "block";
