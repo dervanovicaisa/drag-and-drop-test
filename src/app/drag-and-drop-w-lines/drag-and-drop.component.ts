@@ -45,8 +45,13 @@ export class DragAndDropWLinesComponent implements OnInit {
       this.id = id;
       if (id == 0) {
         localStorage.setItem("prevPointCordinate", JSON.stringify(this.pointCordinate));
-      } else {
+      } else if (id == 1) {
         localStorage.setItem("currPointCordinate", JSON.stringify(this.pointCordinate));
+      }else{
+        localStorage.removeItem("prevPointCordinate");
+        localStorage.removeItem("currPointCordinate");
+        localStorage.removeItem("currValue");
+        localStorage.removeItem("prevValue");
       }
     }
   }

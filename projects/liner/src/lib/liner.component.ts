@@ -57,6 +57,7 @@ export class LinerComponent implements OnChanges {
     this.svg.nativeElement.style.top = 0 + 'px';
     this.svg.nativeElement.style.left = 0 + 'px';
   }
+
   drawSvg() {
     const p1x = JSON.parse(Object(localStorage.getItem("prevPointCordinate"))).x;
     const p1y = JSON.parse(Object(localStorage.getItem("prevPointCordinate"))).y;
